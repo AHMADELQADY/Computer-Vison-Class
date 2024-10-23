@@ -1,0 +1,29 @@
+import cv2
+import numpy as np
+
+# Function to compute directional derivative
+def directional_derivative(image, angle_degrees):
+    # Step 1: Convert the image to grayscale if it's not already
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) if len(image.shape) == 3 else image
+
+    # Step 2: Compute gradients using Sobel operator
+    grad_x = cv2.Sobel(gray_image, cv2.CV_64F, 1, 0, ksize=3)  # Gradient along x-axis
+    grad_y = cv2.Sobel(gray_image, cv2.CV_64F, 0, 1, ksize=3)  # Gradient along y-axis
+
+    # Convert angle to radians
+    angle_radians = np.deg2rad(angle_degrees)
+
+    # Step 3: Compute directional derivative along the specified angle
+    directional_deriv = grad_x * np.cos(angle_radians) + grad_y * np.sin(angle_radians)
+
+    return directional_deriv
+
+# Example of usage:
+image = cv2.imread('path_to_image.jpg')  # Load the image
+angle = 45  # Directional derivative along 45 degrees
+dir_derivative = directional_derivative(image, angle)
+
+# Display the result using OpenCV
+cv2.imshow('Directional Derivative', np.uint8(np.abs(dir_derivative)))  # Take absolute value and cast to uint8 for display
+cv2.waitKey(0)
+cv2.destroyAllWindows()
