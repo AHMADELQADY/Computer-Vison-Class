@@ -67,4 +67,4 @@ def compute_directional_derivative(image_path, theta):
     plt.show()
 
 # Example of how to use the function:
-compute_directional_derivative('/Users/ae/Documents/Magistrale Ingeneria Informatica/Computer Vision/pics/group-water-buffalo-260nw-82222993.jpg', 45)  # Compute derivative along 45 degrees
+compute_directional_derivative('Your_image_path.jpg', 45)  # Compute derivative along 45 degrees
